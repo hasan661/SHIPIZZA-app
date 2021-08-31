@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class Appetizers {
   final String id;
@@ -53,6 +53,38 @@ class Appetizer_Provider with ChangeNotifier {
   List<Appetizers> get appetizers{
     return [..._appetizers];
 
+  }
+
+  List<bool> test = [];
+  dynamic checkboxlisttilebuilder() {
+    List<Widget> widget = [];
+    for (var i = 0; i < _appetizers.length; i++) {
+      test.add(false);
+      widget.add(
+        CheckboxListTile(
+          value: test[i],
+          onChanged: (val) {
+            
+            for(var j=0;j<_appetizers.length;j++)
+            {
+              if(i==j)
+              {
+                test[j] = val!;
+
+              }
+              else{
+                test[j]=false;
+              }
+
+            }
+            
+            notifyListeners();
+          },
+          title: Text("${_appetizers[i].title}"),
+        ),
+      );
+    }
+    return widget;
   }
 
 }

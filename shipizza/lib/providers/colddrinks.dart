@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class ColdDrink {
   final String id;
@@ -38,5 +38,37 @@ class ColdDrinkProvider with ChangeNotifier {
 
   List get colddrinks{
     return [..._colddrinks];
+  }
+
+  List<bool> test = [];
+  dynamic checkboxlisttilebuilder() {
+    List<Widget> widget = [];
+    for (var i = 0; i < _colddrinks.length; i++) {
+      test.add(false);
+      widget.add(
+        CheckboxListTile(
+          value: test[i],
+          onChanged: (val) {
+            
+            for(var j=0;j<_colddrinks.length;j++)
+            {
+              if(i==j)
+              {
+                test[j] = val!;
+
+              }
+              else{
+                test[j]=false;
+              }
+
+            }
+            
+            notifyListeners();
+          },
+          title: Text("${_colddrinks[i].title}"),
+        ),
+      );
+    }
+    return widget;
   }
 }

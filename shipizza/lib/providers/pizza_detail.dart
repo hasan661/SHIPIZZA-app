@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class Pizza {
   final String id;
@@ -7,13 +8,12 @@ class Pizza {
   final String title;
   final String detail;
 
-  const Pizza({
-    required this.detail,
-    required this.title,
-    required this.id,
-    required this.imageURL,
-    required this.price
-  });
+  const Pizza(
+      {required this.detail,
+      required this.title,
+      required this.id,
+      required this.imageURL,
+      required this.price});
 }
 
 class PizzaProvider with ChangeNotifier {
@@ -149,8 +149,39 @@ class PizzaProvider with ChangeNotifier {
     ),
   ];
 
-  
   List<Pizza> get pizzaitems {
     return [..._pizzaitems];
+  }
+
+  List<bool> test = [];
+  dynamic checkboxlisttilebuilder() {
+    List<Widget> widget = [];
+    for (var i = 0; i < _pizzaitems.length; i++) {
+      test.add(false);
+      widget.add(
+        CheckboxListTile(
+          value: test[i],
+          onChanged: (val) {
+            
+            for(var j=0;j<_pizzaitems.length;j++)
+            {
+              if(i==j)
+              {
+                test[j] = val!;
+
+              }
+              else{
+                test[j]=false;
+              }
+
+            }
+            
+            notifyListeners();
+          },
+          title: Text("${_pizzaitems[i].title}"),
+        ),
+      );
+    }
+    return widget;
   }
 }
