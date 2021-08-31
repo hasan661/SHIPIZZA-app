@@ -62,22 +62,11 @@ class Appetizer_Provider with ChangeNotifier {
       test.add(false);
       widget.add(
         CheckboxListTile(
+         
           value: test[i],
           onChanged: (val) {
-            
-            for(var j=0;j<_appetizers.length;j++)
-            {
-              if(i==j)
-              {
-                test[j] = val!;
-
-              }
-              else{
-                test[j]=false;
-              }
-
-            }
-            
+            //  print(id);
+             test[i] = val!;
             notifyListeners();
           },
           title: Text("${_appetizers[i].title}"),

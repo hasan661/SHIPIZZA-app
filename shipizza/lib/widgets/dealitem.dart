@@ -10,7 +10,7 @@ class DealItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final dealData = Provider.of<DealProvider>(context);
     final deallist = dealData.deal;
-    print(deallist);
+    // print(deallist.where((element) => element.id==id));
     dynamic dealbuilder() {
       List<Widget> widgets = [];
       for (var index = 0; index < deallist.length; index++) {
@@ -47,13 +47,34 @@ class DealItem extends StatelessWidget {
                       ),
                     ],
                   ),
-                  subtitle: Text(
-                    "${dealData.listinoneline(deallist, index)}",
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black),
-                  )
+                  subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "${deallist[index].items['Pizza']!.values.toString().substring(1, deallist[index].items['Pizza']!.values.toString().length - 1)} ${deallist[index].items['Pizza']!.keys.toString().substring(1, deallist[index].items['Pizza']!.keys.toString().length - 1)}",
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black),
+                        ),
+                        Text( "${deallist[index].items['ColdDrink']!.values.toString().substring(1, deallist[index].items['ColdDrink']!.values.toString().length - 1)} ${deallist[index].items['ColdDrink']!.keys.toString().substring(1, deallist[index].items['ColdDrink']!.keys.toString().length - 1)}",style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black),),
+                        Text("${deallist[index].items['Appetizer']!.values.toString().substring(1, deallist[index].items['Appetizer']!.values.toString().length - 1)}  ${deallist[index].items['Appetizer']!.keys.toString().substring(1, deallist[index].items['Appetizer']!.keys.toString().length - 1)} Appetizer",style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black),)
+                   
+                    ],
+                  ),
+                   
+                     
+                    
+                    
+                    
+                    
+                
                   //
                   ),
             ),

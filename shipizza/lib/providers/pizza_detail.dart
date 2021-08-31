@@ -154,7 +154,7 @@ class PizzaProvider with ChangeNotifier {
   }
 
   List<bool> test = [];
-  dynamic checkboxlisttilebuilder() {
+  dynamic checkboxlisttilebuilder(var id) {
     List<Widget> widget = [];
     for (var i = 0; i < _pizzaitems.length; i++) {
       test.add(false);
@@ -162,21 +162,10 @@ class PizzaProvider with ChangeNotifier {
         CheckboxListTile(
           value: test[i],
           onChanged: (val) {
-            
-            for(var j=0;j<_pizzaitems.length;j++)
-            {
-              if(i==j)
-              {
-                test[j] = val!;
-
-              }
-              else{
-                test[j]=false;
-              }
-
-            }
-            
+            print(id);
+            test[i] = val!;
             notifyListeners();
+            
           },
           title: Text("${_pizzaitems[i].title}"),
         ),
