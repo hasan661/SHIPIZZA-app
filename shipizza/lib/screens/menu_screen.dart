@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shipizza/screens/cartscreen.dart';
 import 'package:shipizza/widgets/colddrinkitem.dart';
 import 'package:shipizza/widgets/dessertitem.dart';
 import 'package:shipizza/widgets/pizzaitem.dart';
@@ -15,14 +16,22 @@ import '/widgets/dealitem.dart';
 
 // import '../providers/pizza_detail.dart';
 
-
-class MenuScreen extends StatelessWidget {
+class MenuScreen extends StatefulWidget {
   static const routeName = "/menu";
-  
+
+  @override
+  _MenuScreenState createState() => _MenuScreenState();
+}
+
+class _MenuScreenState extends State<MenuScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [IconButton(onPressed: ()
+        {
+          Navigator.of(context).pushNamed(CartScreen.routeName);
+        }, icon: Icon(Icons.shopping_cart))],
         title: Container(
           width: double.infinity,
           child: Text(
@@ -35,18 +44,15 @@ class MenuScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Column(
-            children: [
-              DealItem(),
-              AppetizerItem(),
-              PizzaItem(), 
-              DessertItem(),
-              ColdrinkItem()
-              
-        
-            ],
-          ),
+          children: [
+            DealItem(),
+            AppetizerItem(),
+            PizzaItem(),
+            DessertItem(),
+            ColdrinkItem()
+          ],
+        ),
       ),
-      
     );
   }
 }

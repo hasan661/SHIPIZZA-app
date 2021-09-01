@@ -165,9 +165,9 @@ class PizzaProvider with ChangeNotifier {
           value: test[i],
           onChanged: (val) {
             for (var j = 0; j < _pizzaitems.length; j++) {
-              if (i == j && iter < int.parse(id) && test[i]!=true) {
+              if (i == j && iter < int.parse(id) && test[i] != true) {
                 test[j] = val!;
-                
+
                 iter++;
                 // notifyListeners();
               } else if (test[j] == true && i == j) {
@@ -183,17 +183,30 @@ class PizzaProvider with ChangeNotifier {
             }
           },
           title: Text("${_pizzaitems[i].title}"),
-          
         ),
       );
     }
     return widget;
   }
-  void nullvalue()
-  {
-    test=[];
-    iter=0;
-    notifyListeners();
 
+  void nullvalue() {
+    test = [];
+    iter = 0;
+    notifyListeners();
+  }
+
+   var titles = [];
+  List listreturn() {
+    for (int z = 0; z < _pizzaitems.length; z++) {
+      if (test[z] == true) {
+        titles.add(_pizzaitems[z].id);
+
+      }
+    }
+    notifyListeners();
+    return titles;
+    
+    
+    
   }
 }

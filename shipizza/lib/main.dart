@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shipizza/providers/cart.dart';
 import 'package:shipizza/providers/pizza_detail.dart';
+import 'package:shipizza/screens/cartscreen.dart';
 import 'package:shipizza/screens/dealsscreen.dart';
 import 'package:shipizza/screens/menu_screen.dart';
 
@@ -24,20 +26,22 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (ctx)=> ColdDrinkProvider(),),
         ChangeNotifierProvider(create: (ctx)=> DealProvider(),),
         ChangeNotifierProvider(create: (ctx)=> DessertProvider(),),
-        ChangeNotifierProvider(create: (ctx)=>PizzaProvider(),)
+        ChangeNotifierProvider(create: (ctx)=>PizzaProvider(),),
+        ChangeNotifierProvider(create: (ctx)=>CartProvider(),)
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(
-          primaryColor: Color.fromRGBO(135, 68, 39, 1),
-          canvasColor: Color.fromRGBO(247, 243, 165, 1),
+          primaryColor: Colors.pink,
+          canvasColor: Colors.white
           
         ),
         routes: {
           '/':(ctx)=>ShipizzaScreen(),
           MenuScreen.routeName:(ctx)=> MenuScreen(),
-          DealsScreen.routeName:(ctx)=>DealsScreen()
+          DealsScreen.routeName:(ctx)=>DealsScreen(),
+          CartScreen.routeName:(ctx)=>CartScreen()
           
         },
       ),

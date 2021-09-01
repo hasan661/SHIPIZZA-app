@@ -78,4 +78,8 @@ class ColdDrinkProvider with ChangeNotifier {
     notifyListeners();
 
   }
+  void listreturn()
+  {
+    print(test);
+  }
 }

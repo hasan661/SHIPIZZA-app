@@ -21,7 +21,7 @@ class DealProvider with ChangeNotifier {
     Deal(
       id: "d1",
       items: {
-        "Pizza": {"Pan Pizza": 1},
+        "Pizza": {"Pan Pizza": 2},
         "ColdDrink": {"Tin": 1},
         "Appetizer": {"Any": "2 pieces"}
       },

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shipizza/providers/appetizers.dart';
+import 'package:shipizza/providers/cart.dart';
 import 'package:shipizza/providers/colddrinks.dart';
 import 'package:shipizza/providers/deal.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -8,7 +9,7 @@ import 'package:shipizza/providers/pizza_detail.dart';
 
 class DealsScreen extends StatelessWidget {
   static const routeName = "/deals";
-  bool test = false;
+  var test = false;
   @override
   Widget build(BuildContext context) {
     final id = ModalRoute.of(context)!.settings.arguments;
@@ -16,6 +17,8 @@ class DealsScreen extends StatelessWidget {
     final pizzaData = Provider.of<PizzaProvider>(context);
     final appetizerData = Provider.of<Appetizer_Provider>(context);
     final colddrinkData = Provider.of<ColdDrinkProvider>(context);
+    final cartData = Provider.of<CartProvider>(context);
+    final pizzaitems = pizzaData.pizzaitems;
     // print(dealData.title);
     Widget headingbuilder(var text) {
       return Padding(
@@ -38,13 +41,14 @@ class DealsScreen extends StatelessWidget {
         title: Text(
           "${dealData.title}",
         ),
-        leading: IconButton(icon: new Icon(Icons.arrow_back), onPressed: () {
-          colddrinkData.nullvalue();
-          pizzaData.nullvalue();
-          appetizerData.nullvalue();
-          Navigator.pop(context);
-
-        }),
+        leading: IconButton(
+            icon: new Icon(Icons.arrow_back),
+            onPressed: () {
+              colddrinkData.nullvalue();
+              pizzaData.nullvalue();
+              appetizerData.nullvalue();
+              Navigator.pop(context);
+            }),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -60,7 +64,6 @@ class DealsScreen extends StatelessWidget {
                         fontSize: 20),
                   ),
                   title: Row(
-                    // mainAxisAlignment :MainAxisAlignment,
                     children: [
                       Text(
                         "${dealData.title}",
@@ -119,7 +122,9 @@ class DealsScreen extends StatelessWidget {
                 dealData.items['ColdDrink']!.values.toString().substring(1,
                     dealData.items['ColdDrink']!.values.toString().length - 1)),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                cartData.additems(dealData.price, dealData.title);
+              },
               child: Text("Add To Cart"),
               style: ElevatedButton.styleFrom(
                   primary: Theme.of(context).primaryColor),

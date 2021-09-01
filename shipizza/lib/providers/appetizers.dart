@@ -92,5 +92,9 @@ class Appetizer_Provider with ChangeNotifier {
     notifyListeners();
 
   }
+  void listreturn()
+  {
+    print(test);
+  }
 
 }
