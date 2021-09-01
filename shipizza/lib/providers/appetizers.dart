@@ -65,8 +65,18 @@ class Appetizer_Provider with ChangeNotifier {
          
           value: test[i],
           onChanged: (val) {
-            //  print(id);
-             test[i] = val!;
+            for(var j=0;j<_appetizers.length;j++)
+            {
+              if(i==j)
+              {
+                test[j]=val!;
+
+              }
+              else{
+                test[j]=false;
+              }
+            }
+            //  test[i] = val!;
             notifyListeners();
           },
           title: Text("${_appetizers[i].title}"),
@@ -74,6 +84,13 @@ class Appetizer_Provider with ChangeNotifier {
       );
     }
     return widget;
+  }
+  void nullvalue()
+  {
+    test=[];
+    // iter=0;
+    notifyListeners();
+
   }
 
 }

@@ -38,6 +38,13 @@ class DealsScreen extends StatelessWidget {
         title: Text(
           "${dealData.title}",
         ),
+        leading: IconButton(icon: new Icon(Icons.arrow_back), onPressed: () {
+          colddrinkData.nullvalue();
+          pizzaData.nullvalue();
+          appetizerData.nullvalue();
+          Navigator.pop(context);
+
+        }),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -103,9 +110,14 @@ class DealsScreen extends StatelessWidget {
             headingbuilder("Choose Your Appetizer"),
             ...appetizerData.checkboxlisttilebuilder(),
             headingbuilder("Choose Your Flavour"),
-            ...pizzaData.checkboxlisttilebuilder(dealData.items['Pizza']!.values.toString().substring(1, dealData.items['Pizza']!.values.toString().length-1)),
+            ...pizzaData.checkboxlisttilebuilder(dealData.items['Pizza']!.values
+                .toString()
+                .substring(
+                    1, dealData.items['Pizza']!.values.toString().length - 1)),
             headingbuilder("Choose Your Drink/s"),
-            ...colddrinkData.checkboxlisttilebuilder(dealData.items['ColdDrink']!.values.toString().substring(1, dealData.items['ColdDrink']!.values.toString().length-1)),
+            ...colddrinkData.checkboxlisttilebuilder(
+                dealData.items['ColdDrink']!.values.toString().substring(1,
+                    dealData.items['ColdDrink']!.values.toString().length - 1)),
             ElevatedButton(
               onPressed: () {},
               child: Text("Add To Cart"),

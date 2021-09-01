@@ -41,6 +41,7 @@ class ColdDrinkProvider with ChangeNotifier {
   }
 
   List<bool> test = [];
+  var iter=0;
   dynamic checkboxlisttilebuilder(var id) {
     List<Widget> widget = [];
     for (var i = 0; i < _colddrinks.length; i++) {
@@ -49,13 +50,32 @@ class ColdDrinkProvider with ChangeNotifier {
         CheckboxListTile(
           value: test[i],
           onChanged: (val) {
-            test[i] = val!;
-            notifyListeners();
+           for (var j = 0; j < _colddrinks.length; j++) {
+              if (i == j && iter < int.parse(id) && test[i]!=true) {
+                test[j] = val!;
+                
+                iter++;
+             
+              } else if (test[j] == true && i == j) {
+                test[j] = val!;
+                iter--;
+                
+              }
+              
+              notifyListeners();
+            }
           },
           title: Text("${_colddrinks[i].title}"),
         ),
       );
     }
     return widget;
+  }
+  void nullvalue()
+  {
+    test=[];
+    iter=0;
+    notifyListeners();
+
   }
 }

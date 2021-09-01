@@ -62,6 +62,7 @@ class DealProvider with ChangeNotifier {
       serves: "8",
       price: 1500,
     ),
+    
   ];
 
   dynamic filteredwithid(var id) {
