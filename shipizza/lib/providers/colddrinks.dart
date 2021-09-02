@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class ColdDrink {
   final String id;
   final String title;
@@ -40,46 +39,26 @@ class ColdDrinkProvider with ChangeNotifier {
     return [..._colddrinks];
   }
 
-  List<bool> test = [];
-  var iter=0;
-  dynamic checkboxlisttilebuilder(var id) {
+  List<List<bool>> switchlisttilebool = [];
+  List<Widget> checkboxlisttilebuilder() {
+    
     List<Widget> widget = [];
-    for (var i = 0; i < _colddrinks.length; i++) {
-      test.add(false);
+    
+
+    for (int i = 0; i < _colddrinks.length; i++) {
+      switchlisttilebool[i].add(false);
       widget.add(
         CheckboxListTile(
-          value: test[i],
+          value: switchlisttilebool[i][i],
           onChanged: (val) {
-           for (var j = 0; j < _colddrinks.length; j++) {
-              if (i == j && iter < int.parse(id) && test[i]!=true) {
-                test[j] = val!;
-                
-                iter++;
-             
-              } else if (test[j] == true && i == j) {
-                test[j] = val!;
-                iter--;
-                
-              }
-              
-              notifyListeners();
-            }
+            switchlisttilebool[i][i] = val!;
+            notifyListeners();
           },
           title: Text("${_colddrinks[i].title}"),
         ),
       );
+      
     }
     return widget;
-  }
-  void nullvalue()
-  {
-    test=[];
-    iter=0;
-    notifyListeners();
-
-  }
-  void listreturn()
-  {
-    print(test);
   }
 }

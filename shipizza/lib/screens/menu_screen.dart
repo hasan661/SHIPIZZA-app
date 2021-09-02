@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:shipizza/screens/cartscreen.dart';
+// import 'package:shipizza/screens/cartscreen.dart';
 import 'package:shipizza/widgets/colddrinkitem.dart';
 import 'package:shipizza/widgets/dessertitem.dart';
 import 'package:shipizza/widgets/pizzaitem.dart';
@@ -30,7 +30,7 @@ class _MenuScreenState extends State<MenuScreen> {
       appBar: AppBar(
         actions: [IconButton(onPressed: ()
         {
-          Navigator.of(context).pushNamed(CartScreen.routeName);
+          
         }, icon: Icon(Icons.shopping_cart))],
         title: Container(
           width: double.infinity,

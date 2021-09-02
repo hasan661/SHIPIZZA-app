@@ -55,46 +55,6 @@ class Appetizer_Provider with ChangeNotifier {
 
   }
 
-  List<bool> test = [];
-  dynamic checkboxlisttilebuilder() {
-    List<Widget> widget = [];
-    for (var i = 0; i < _appetizers.length; i++) {
-      test.add(false);
-      widget.add(
-        CheckboxListTile(
-         
-          value: test[i],
-          onChanged: (val) {
-            for(var j=0;j<_appetizers.length;j++)
-            {
-              if(i==j)
-              {
-                test[j]=val!;
-
-              }
-              else{
-                test[j]=false;
-              }
-            }
-            //  test[i] = val!;
-            notifyListeners();
-          },
-          title: Text("${_appetizers[i].title}"),
-        ),
-      );
-    }
-    return widget;
-  }
-  void nullvalue()
-  {
-    test=[];
-    // iter=0;
-    notifyListeners();
-
-  }
-  void listreturn()
-  {
-    print(test);
-  }
+  
 
 }

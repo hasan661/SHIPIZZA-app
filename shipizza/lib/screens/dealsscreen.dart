@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shipizza/providers/appetizers.dart';
-import 'package:shipizza/providers/cart.dart';
 import 'package:shipizza/providers/colddrinks.dart';
 import 'package:shipizza/providers/deal.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -17,24 +16,10 @@ class DealsScreen extends StatelessWidget {
     final pizzaData = Provider.of<PizzaProvider>(context);
     final appetizerData = Provider.of<Appetizer_Provider>(context);
     final colddrinkData = Provider.of<ColdDrinkProvider>(context);
-    final cartData = Provider.of<CartProvider>(context);
     final pizzaitems = pizzaData.pizzaitems;
+ 
     // print(dealData.title);
-    Widget headingbuilder(var text) {
-      return Padding(
-        padding: EdgeInsets.all(8),
-        child: Container(
-          width: double.infinity,
-          color: Theme.of(context).primaryColor,
-          child: Text(
-            text,
-            style: GoogleFonts.anton(
-                fontSize: 28, color: Theme.of(context).canvasColor),
-            textAlign: TextAlign.center,
-          ),
-        ),
-      );
-    }
+
 
     return Scaffold(
       appBar: AppBar(
@@ -44,10 +29,8 @@ class DealsScreen extends StatelessWidget {
         leading: IconButton(
             icon: new Icon(Icons.arrow_back),
             onPressed: () {
-              colddrinkData.nullvalue();
-              pizzaData.nullvalue();
-              appetizerData.nullvalue();
-              Navigator.pop(context);
+              Navigator.of(context).pop();
+              
             }),
       ),
       body: SingleChildScrollView(
@@ -110,25 +93,10 @@ class DealsScreen extends StatelessWidget {
                   //
                   ),
             ),
-            headingbuilder("Choose Your Appetizer"),
-            ...appetizerData.checkboxlisttilebuilder(),
-            headingbuilder("Choose Your Flavour"),
-            ...pizzaData.checkboxlisttilebuilder(dealData.items['Pizza']!.values
-                .toString()
-                .substring(
-                    1, dealData.items['Pizza']!.values.toString().length - 1)),
-            headingbuilder("Choose Your Drink/s"),
-            ...colddrinkData.checkboxlisttilebuilder(
-                dealData.items['ColdDrink']!.values.toString().substring(1,
-                    dealData.items['ColdDrink']!.values.toString().length - 1)),
-            ElevatedButton(
-              onPressed: () {
-                cartData.additems(dealData.price, dealData.title);
-              },
-              child: Text("Add To Cart"),
-              style: ElevatedButton.styleFrom(
-                  primary: Theme.of(context).primaryColor),
-            )
+            
+            ...colddrinkData.checkboxlisttilebuilder(),
+            ...colddrinkData.checkboxlisttilebuilder()
+        
           ],
         ),
       ),
