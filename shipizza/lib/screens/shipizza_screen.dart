@@ -38,13 +38,13 @@ class _ShipizzaScreenState extends State<ShipizzaScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Container(
-              padding: EdgeInsets.all(30),
+              padding: EdgeInsets.all(10),
               child: Container(
                   alignment: Alignment.center,
                   child: Image.asset(
-                    "assets/images/Logo.jpg",
-                    height: 200,
-                    width: 200,
+                    "assets/images/Logo.png",
+                    height: 500,
+                    width: 500,
                   )),
             ),
             CircularProgressIndicator(

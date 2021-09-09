@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shipizza/providers/appetizers.dart';
+import 'package:shipizza/providers/cart.dart';
 import 'package:shipizza/providers/colddrinks.dart';
 import 'package:shipizza/providers/deal.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -16,21 +17,52 @@ class DealsScreen extends StatelessWidget {
     final pizzaData = Provider.of<PizzaProvider>(context);
     final appetizerData = Provider.of<Appetizer_Provider>(context);
     final colddrinkData = Provider.of<ColdDrinkProvider>(context);
-    final pizzaitems = pizzaData.pizzaitems;
- 
-    // print(dealData.title);
+    final tinquantity = int.parse(dealData.items['ColdDrink'].values
+        .toString()
+        .substring(
+            1, dealData.items['ColdDrink'].values.toString().length - 1));
+    final pizzaquantity = int.parse(dealData.items['Pizza'].values
+        .toString()
+        .substring(1, dealData.items['Pizza'].values.toString().length - 1));
+    final cartData=Provider.of<CartProvider>(context);
 
+    Widget headingBuilder(String text) {
+      // print(tinquantity.runtimeType);
+      return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(children: [
+            Container(
+                width: double.infinity,
+                color: Theme.of(context).primaryColor,
+                child: Text(
+                  "$text",
+                  style: GoogleFonts.anton(textStyle: TextStyle(fontSize: 28, color: Theme.of(context).canvasColor),),
+                  textAlign: TextAlign.center,
+                ))
+          ]));
+    }
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          "${dealData.title}",
+        title: Container(
+          width: double.infinity,
+          child: Text(
+            "${dealData.title}",
+            style: GoogleFonts.anton(textStyle: TextStyle(fontSize: 28, color: Theme.of(context).canvasColor))
+                  ,
+              textAlign: TextAlign.start,
+          ),
         ),
         leading: IconButton(
             icon: new Icon(Icons.arrow_back),
             onPressed: () {
+              pizzaData.switchlisttilebool.clear();
+              pizzaData.iter = 0;
+              appetizerData.switchlisttilebool.clear();
+              colddrinkData.switchlisttilebool.clear();
+              colddrinkData.iter = 0;
+
               Navigator.of(context).pop();
-              
             }),
       ),
       body: SingleChildScrollView(
@@ -50,10 +82,10 @@ class DealsScreen extends StatelessWidget {
                     children: [
                       Text(
                         "${dealData.title}",
-                        style: TextStyle(
-                            color: Theme.of(context).primaryColor,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20),
+                       style: TextStyle(
+                        color: Theme.of(context).primaryColor,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20)
                       ),
                       Text(
                         "(Serves: ${dealData.serves})",
@@ -93,10 +125,19 @@ class DealsScreen extends StatelessWidget {
                   //
                   ),
             ),
+            headingBuilder("Choose Your Appetizer"),
+            ...appetizerData.checkboxlisttilebuilder(),
+            headingBuilder("Choose Your Pizza/s"),
+            ...pizzaData.checkboxlisttilebuilder(pizzaquantity),
+            headingBuilder("Choose Your Drink/s"),
+            ...colddrinkData.checkboxlisttilebuilder(tinquantity),
+            if(colddrinkData.ColdDrinkCount()==tinquantity && appetizerData.AppetizerCount()==1 && pizzaData.PizzaCount()==pizzaquantity)
+            ElevatedButton(onPressed: () {
+  
+              
+              cartData.addtocart(dealData.title, dealData.price);
             
-            ...colddrinkData.checkboxlisttilebuilder(),
-            ...colddrinkData.checkboxlisttilebuilder()
-        
+            }, child: Text("Add to cart"),style: ElevatedButton.styleFrom(primary: Theme.of(context).primaryColor))
           ],
         ),
       ),

@@ -21,7 +21,7 @@ class DealProvider with ChangeNotifier {
     Deal(
       id: "d1",
       items: {
-        "Pizza": {"Pan Pizza": 2},
+        "Pizza": {"Pan Pizza": 1},
         "ColdDrink": {"Tin": 1},
         "Appetizer": {"Any": "2 pieces"}
       },
@@ -73,12 +73,14 @@ class DealProvider with ChangeNotifier {
     return [..._deals];
   }
 
-  String listinoneline(List item, int index) {
-    String value = "";
+  // String listinoneline(List item, int index) {
+  //   String value = "";
 
-    value = item[index].items.join();
+  //   value = item[index].items.join();
 
-    return value;
-    //
-  }
+  //   return value;
+  //   //
+  // }
+
+  
 }

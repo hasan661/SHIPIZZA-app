@@ -3,14 +3,15 @@ import 'package:flutter/material.dart';
 class ColdDrink {
   final String id;
   final String title;
-  final Map<String, int> price;
+  final  price;
   final String imageURL;
 
   const ColdDrink(
       {required this.imageURL,
       required this.id,
       required this.title,
-      this.price = const {"Tin": 100, "500 ml": 80, "1.5 litres": 200}});
+      this.price = 200
+});
 }
 
 class ColdDrinkProvider with ChangeNotifier {
@@ -39,26 +40,56 @@ class ColdDrinkProvider with ChangeNotifier {
     return [..._colddrinks];
   }
 
-  List<List<bool>> switchlisttilebool = [];
-  List<Widget> checkboxlisttilebuilder() {
-    
+  List<bool> switchlisttilebool = [];
+  var iter=0;
+  List<Widget> checkboxlisttilebuilder(int value) {
     List<Widget> widget = [];
-    
 
     for (int i = 0; i < _colddrinks.length; i++) {
-      switchlisttilebool[i].add(false);
+      switchlisttilebool.add(false);
       widget.add(
         CheckboxListTile(
-          value: switchlisttilebool[i][i],
+          
+          value: switchlisttilebool[i],
           onChanged: (val) {
-            switchlisttilebool[i][i] = val!;
+            for(int j=0;j<_colddrinks.length;j++)
+            {
+              if(i==j && value>iter && switchlisttilebool[i]!=true)
+              {
+                switchlisttilebool[i] = val!;
+                iter++;
+              }
+              else if(i==j && switchlisttilebool[i]==true)
+              {
+                switchlisttilebool[i]=val!;
+                iter--;
+              }
+              print(iter);
+            }
+            
             notifyListeners();
           },
           title: Text("${_colddrinks[i].title}"),
         ),
       );
-      
     }
     return widget;
   }
+  
+  int ColdDrinkCount()
+  {
+    var colddrinkcount=0;
+    for (var i=0;i<switchlisttilebool.length;i++)
+  {
+    if(switchlisttilebool[i]==true)
+    {
+      colddrinkcount++;
+    }
+   
+
+  }
+  return colddrinkcount;
+  }
+  
 }
+
